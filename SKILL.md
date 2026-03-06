@@ -91,6 +91,25 @@ If LOW confidence: explicitly caveat the score, recommend the user do additional
 
 ### Phase 4: Output
 
+**Chat delivery (Telegram/Discord):** Use the COMPACT format below — keep under 3000 chars. Save the full detailed report to `memory/research/[product-name].md`.
+
+**File delivery (when asked for full report):** Use the FULL template.
+
+#### Compact Format (for chat):
+```
+📊 [Product Name] — [Score]/10 ([Confidence])
+
+👤 Best for: [one line]
+🏆 Top strengths: [2-3 bullet points]  
+🚩 Top issues: [2-3 bullet points]
+💰 Best value: [product] at $X.XX/serving
+🔄 Top alternative: [product] — [why]
+💀 Dealbreakers: [none / detail]
+
+Full report saved → memory/research/[slug].md
+```
+
+#### Full Format (for files):
 Use this exact template:
 
 ```
@@ -142,6 +161,14 @@ After delivering results, save a summary to `memory/research/[product-name].md` 
 - Query, date, verdict, score, key findings, sources consulted
 - This builds a personal review database over time
 
+## Research Depth Modes
+
+- **Quick** — 2-3 searches, Reddit + one expert source, compact output only. Use for: simple Amazon purchases under $50, commodity products, "which brand of X should I get?"
+- **Standard** — Full research loop as described above. Use for: most product/service research, health products, things over $50.
+- **Deep** — Standard + YouTube transcripts + Twitter complaint analysis + sub-agent parallelization. Use for: health/supplement decisions, expensive purchases ($200+), services with ongoing commitments, anything where a wrong choice has real consequences.
+
+Auto-select depth based on query context. When unclear, default to Standard.
+
 ## Category Detection
 
 Auto-detect from query context. When ambiguous, ask. Categories determine which sources to prioritize and temporal decay to apply. See `references/methodology.md` for category-specific source maps and decay rates.
@@ -156,7 +183,11 @@ Auto-detect from query context. When ambiguous, ask. Categories determine which 
 - **Temporal decay matters.** A 3-year-old restaurant review is noise. A 3-year-old cast-iron pan review is gold.
 - **Weight review quality, not just platform.** A 200-comment Reddit thread > a 3-comment post.
 - **Normalize prices to cost-per-serving** at the recommended dose, not just container price. A $30 container with 60 servings ($0.50/serving) is better value than a $15 container with 20 servings ($0.75/serving). Always compute this for product comparisons.
-- **Update brand intel after research.** After completing research, update `references/brand-intel.md` with any new brand signals discovered.
+- **Update brand intel after research.** After completing research, update `references/brand-intel.md`:
+  - New brands: append a new entry with trust level, key signals, source, date
+  - Existing brands: add new signals under the existing entry, update date. If trust level should change, update it with rationale
+  - Product-specific flags: note which product the signal applies to (e.g., NOW Foods flagged for glycine, not all products)
+- **YouTube fallback:** If transcript extraction fails (no captions available), fall back to searching `"[product] review" site:youtube.com` and use the video descriptions + search snippets for signal. Don't skip YouTube entirely.
 
 ## Parallel Research Mode (for sub-agents)
 

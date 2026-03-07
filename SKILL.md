@@ -1,6 +1,6 @@
 ---
 name: consensus-research
-description: Multi-source product, service, and restaurant research using weighted consensus scoring. Use when researching any purchase decision, comparing products/brands, evaluating services/providers, finding restaurants, or when the user asks for reviews, recommendations, or "is X worth it?" questions. Aggregates Reddit, Amazon, HackerNews, expert reviews, Twitter complaints, and niche forums — weights by platform reliability and cross-platform convergence. NOT for: quick price checks, simple spec lookups, or questions answerable from a single source.
+description: Multi-source product, service, and restaurant research using weighted consensus scoring and structured claims output. Use when researching any purchase decision, comparing products/brands, evaluating services/providers, finding restaurants, or when the user asks for reviews, recommendations, or "is X worth it?" questions. Aggregates Reddit, Amazon, HackerNews, expert reviews, GitHub repo signals for software/tech, Twitter complaints, and niche forums — weights by platform reliability and cross-platform convergence. NOT for: quick price checks, simple spec lookups, or questions answerable from a single source.
 ---
 
 # Consensus Research Skill
@@ -17,7 +17,7 @@ Multi-source research engine that finds truth at the intersection of independent
 
 Before starting new research:
 1. Check `memory/research/` for existing entries on the same or related products/services
-2. Check `references/brand-intel.md` for any known brand reputation signals
+2. Check `references/brand-intel.json` first for any known brand reputation signals. `references/brand-intel.md` is the generated human-readable view.
 3. Surface findings proactively — e.g., *"Note: previous research flagged Nutricost's COA transparency issues"* or *"Brand intel shows NOW Foods FLAGGED for glycine specifically"*
 4. If prior research exists and is within the temporal decay window, offer to update rather than start fresh
 
@@ -59,7 +59,7 @@ YouTube is MEDIUM-HIGH signal — visual proof is harder to fake, and long-form 
 
 ### Phase 2: Extract & Normalize Themes
 
-For each source, extract:
+The script now normalizes evidence into a `claims[]` layer before grouping or scoring. For each source, extract:
 - **Recurring complaints** — group semantically similar issues into themes ("battery dies fast" = "poor battery life")
 - **Recurring praise** — what keeps coming up positively
 - **Failure timeline** — when do things break? (3 months? 1 year?)
@@ -90,6 +90,8 @@ Before generating a verdict, assess data volume:
 If LOW confidence: explicitly caveat the score, recommend the user do additional research, and note what specific data is missing. Do NOT produce a confident-looking 7.5/10 score on thin data. A low-confidence 6.0 with honest caveats is more useful than a false-precision 7.3.
 
 ### Phase 4: Output
+
+`research.js` now returns structured JSON by default. Use `--format structured` (default), `--format raw`, or `--format both` when you need the old raw source dump alongside the synthesized result.
 
 **Chat delivery (Telegram/Discord):** Use the COMPACT format below — keep under 3000 chars. Save the full detailed report to `memory/research/[product-name].md`.
 
@@ -183,10 +185,10 @@ Auto-detect from query context. When ambiguous, ask. Categories determine which 
 - **Temporal decay matters.** A 3-year-old restaurant review is noise. A 3-year-old cast-iron pan review is gold.
 - **Weight review quality, not just platform.** A 200-comment Reddit thread > a 3-comment post.
 - **Normalize prices to cost-per-serving** at the recommended dose, not just container price. A $30 container with 60 servings ($0.50/serving) is better value than a $15 container with 20 servings ($0.75/serving). Always compute this for product comparisons.
-- **Update brand intel after research.** After completing research, update `references/brand-intel.md`:
-  - New brands: append a new entry with trust level, key signals, source, date
-  - Existing brands: add new signals under the existing entry, update date. If trust level should change, update it with rationale
-  - Product-specific flags: note which product the signal applies to (e.g., NOW Foods flagged for glycine, not all products)
+- **Update brand intel after research.** After completing research, update `references/brand-intel.json` and regenerate `references/brand-intel.md`:
+  - Preserve manual entries in the JSON sidecar
+  - Append new auto signals per brand and category when 2+ claims converge
+  - Product-specific flags still matter: note which product the signal applies to (e.g., NOW Foods flagged for glycine, not all products)
 - **YouTube fallback:** If transcript extraction fails (no captions available), fall back to searching `"[product] review" site:youtube.com` and use the video descriptions + search snippets for signal. Don't skip YouTube entirely.
 
 ## Parallel Research Mode (for sub-agents)

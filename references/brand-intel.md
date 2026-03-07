@@ -1,53 +1,72 @@
 # Brand Intel Database
 
-Persistent database of brand reputation signals learned from research. Updated after each research run.
-
-**Trust Levels:**
-- **HIGH** — Extensive third-party testing, strong track record, trusted by professionals
-- **MEDIUM** — Generally decent, some concerns or gaps in transparency
-- **LOW** — Notable quality or trust issues, use with caution
-- **FLAGGED** — Specific product-level problems identified, may be fine for other products
-
----
-
-## Nutricost
-- **Trust Level:** MEDIUM
-- **Key signals:** ConsumerLab tested/passed. Refuses to share third-party COAs publicly. Good value-to-quality ratio. Popular on Amazon with strong verified review volume.
-- **Source:** Glycine powder research — Reddit r/supplements threads (Nov 2024, 85 upvotes on COA transparency thread)
-- **Date:** 2026-03-06
-
-## NOW Foods
-- **Trust Level:** FLAGGED (glycine specifically)
-- **Key signals:** 4 independent Reddit users reported glycine product issues: "isn't real glycine," "made me sick," "vitals crashed." Own in-house testing labs, GMP certified facility. May be perfectly fine for other product lines — flag is glycine-specific.
-- **Source:** Glycine powder research — Reddit r/supplements, r/nootropics (multiple threads, 2024)
-- **Date:** 2026-03-06
-
-## Thorne
-- **Trust Level:** HIGH
-- **Key signals:** Premium brand, extensive third-party testing (NSF Certified for Sport on many products). HSA/FSA eligible. Trusted by practitioners and athletes. Higher price point reflects quality controls.
-- **Source:** General supplement research, widespread Reddit consensus
-- **Date:** 2026-03-06
+*Auto-generated from brand-intel.json. Preserve manual notes in the JSON sidecar.*
 
 ## BulkSupplements
-- **Trust Level:** MEDIUM
-- **Key signals:** Cheapest bulk pricing. ConsumerLab has tested some products (passed). Minimal packaging/branding — pure powder focus. Some Reddit users question consistency across batches.
-- **Source:** General supplement research, ConsumerLab reports
-- **Date:** 2026-03-06
-
-## Swanson (Ajipure)
-- **Trust Level:** HIGH (amino acids specifically)
-- **Key signals:** Ajipure line uses Japanese pharmaceutical-grade sourcing (Ajinomoto). Fermentation-derived amino acids, not chemical extraction. Considered gold standard for amino acid purity among supplement enthusiasts.
-- **Source:** Glycine powder research — Reddit r/supplements consensus on Ajipure sourcing
-- **Date:** 2026-03-06
-
-## Pure Encapsulations
-- **Trust Level:** HIGH
-- **Key signals:** Premium hypoallergenic formulations. Free from common allergens, fillers, and coatings. Trusted by functional medicine practitioners. Extensively tested. Higher price point.
-- **Source:** General supplement research, practitioner recommendations
-- **Date:** 2026-03-06
+- **Trust level:** medium
+- **Sentiment:** mixed
+- **Categories:** supplement
+- **Signal:** Cheapest bulk pricing for pure powder products. (2026-03-06, manual)
+- **Signal:** ConsumerLab has tested some products and passed them. (2026-03-06, manual)
+- **Note:** Some Reddit users question consistency across batches. (2026-03-06, manual)
+- **Notes:** Minimal packaging and branding. Pure powder focus.
+- **Last updated:** 2026-03-06
+- **Research count:** 1
 
 ## Life Extension
-- **Trust Level:** HIGH
-- **Key signals:** Strong research-backing for formulations. Publishes studies and rationale for ingredient choices. Good quality controls. Trusted by biohacker/longevity community.
-- **Source:** General supplement research, Reddit r/supplements, r/longevity
-- **Date:** 2026-03-06
+- **Trust level:** high
+- **Sentiment:** positive
+- **Categories:** supplement
+- **Signal:** Strong research backing for formulations and ingredient choices. (2026-03-06, manual)
+- **Signal:** Trusted by biohacker and longevity communities for quality controls. (2026-03-06, manual)
+- **Last updated:** 2026-03-06
+- **Research count:** 1
+
+## NOW Foods
+- **Trust level:** caution
+- **Sentiment:** flagged
+- **Categories:** supplement
+- **Flag:** Four independent Reddit users reported glycine product issues. (2026-03-06, manual)
+- **Signal:** Own in-house testing labs and a GMP-certified facility were noted. (2026-03-06, manual)
+- **Notes:** Glycine is flagged specifically. Other product lines may still be fine.
+- **Last updated:** 2026-03-06
+- **Research count:** 1
+
+## Nutricost
+- **Trust level:** medium
+- **Sentiment:** mixed
+- **Categories:** supplement
+- **Signal:** ConsumerLab tested and passed the brand. (2026-03-06, manual)
+- **Flag:** The brand refuses to share third-party COAs publicly. (2026-03-06, manual)
+- **Signal:** Good value-to-quality ratio with strong Amazon verified review volume. (2026-03-06, manual)
+- **Last updated:** 2026-03-06
+- **Research count:** 1
+
+## Pure Encapsulations
+- **Trust level:** high
+- **Sentiment:** positive
+- **Categories:** supplement
+- **Signal:** Premium hypoallergenic formulations with extensive testing. (2026-03-06, manual)
+- **Signal:** Trusted by functional medicine practitioners despite a higher price point. (2026-03-06, manual)
+- **Last updated:** 2026-03-06
+- **Research count:** 1
+
+## Swanson (Ajipure)
+- **Trust level:** high
+- **Sentiment:** positive
+- **Categories:** supplement
+- **Signal:** Ajipure sourcing is treated as a gold standard for amino acid purity. (2026-03-06, manual)
+- **Signal:** Japanese pharmaceutical-grade sourcing from Ajinomoto is a strong reputation signal. (2026-03-06, manual)
+- **Notes:** High confidence for amino acids specifically.
+- **Last updated:** 2026-03-06
+- **Research count:** 1
+
+## Thorne
+- **Trust level:** high
+- **Sentiment:** positive
+- **Categories:** supplement
+- **Signal:** Extensive third-party testing and NSF Certified for Sport on many products. (2026-03-06, manual)
+- **Signal:** Trusted by practitioners and athletes for quality controls. (2026-03-06, manual)
+- **Notes:** Premium pricing reflects tighter quality controls.
+- **Last updated:** 2026-03-06
+- **Research count:** 1

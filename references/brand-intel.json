@@ -1,0 +1,201 @@
+{
+  "schemaVersion": 1,
+  "brands": {
+    "BulkSupplements": {
+      "sentiment": "mixed",
+      "categories": [
+        "supplement"
+      ],
+      "trustLevel": "medium",
+      "signals": [
+        {
+          "dimension": "value",
+          "polarity": "positive",
+          "detail": "Cheapest bulk pricing for pure powder products.",
+          "date": "2026-03-06",
+          "source": "manual"
+        },
+        {
+          "dimension": "quality",
+          "polarity": "positive",
+          "detail": "ConsumerLab has tested some products and passed them.",
+          "date": "2026-03-06",
+          "source": "manual"
+        },
+        {
+          "dimension": "quality",
+          "polarity": "mixed",
+          "detail": "Some Reddit users question consistency across batches.",
+          "date": "2026-03-06",
+          "source": "manual"
+        }
+      ],
+      "notes": "Minimal packaging and branding. Pure powder focus.",
+      "lastUpdated": "2026-03-06",
+      "researchCount": 1
+    },
+    "Life Extension": {
+      "sentiment": "positive",
+      "categories": [
+        "supplement"
+      ],
+      "trustLevel": "high",
+      "signals": [
+        {
+          "dimension": "quality",
+          "polarity": "positive",
+          "detail": "Strong research backing for formulations and ingredient choices.",
+          "date": "2026-03-06",
+          "source": "manual"
+        },
+        {
+          "dimension": "quality",
+          "polarity": "positive",
+          "detail": "Trusted by biohacker and longevity communities for quality controls.",
+          "date": "2026-03-06",
+          "source": "manual"
+        }
+      ],
+      "notes": "",
+      "lastUpdated": "2026-03-06",
+      "researchCount": 1
+    },
+    "NOW Foods": {
+      "sentiment": "flagged",
+      "categories": [
+        "supplement"
+      ],
+      "trustLevel": "caution",
+      "signals": [
+        {
+          "dimension": "quality",
+          "polarity": "negative",
+          "detail": "Four independent Reddit users reported glycine product issues.",
+          "date": "2026-03-06",
+          "source": "manual"
+        },
+        {
+          "dimension": "quality",
+          "polarity": "positive",
+          "detail": "Own in-house testing labs and a GMP-certified facility were noted.",
+          "date": "2026-03-06",
+          "source": "manual"
+        }
+      ],
+      "notes": "Glycine is flagged specifically. Other product lines may still be fine.",
+      "lastUpdated": "2026-03-06",
+      "researchCount": 1
+    },
+    "Nutricost": {
+      "sentiment": "mixed",
+      "categories": [
+        "supplement"
+      ],
+      "trustLevel": "medium",
+      "signals": [
+        {
+          "dimension": "testing",
+          "polarity": "positive",
+          "detail": "ConsumerLab tested and passed the brand.",
+          "date": "2026-03-06",
+          "source": "manual"
+        },
+        {
+          "dimension": "testing",
+          "polarity": "negative",
+          "detail": "The brand refuses to share third-party COAs publicly.",
+          "date": "2026-03-06",
+          "source": "manual"
+        },
+        {
+          "dimension": "value",
+          "polarity": "positive",
+          "detail": "Good value-to-quality ratio with strong Amazon verified review volume.",
+          "date": "2026-03-06",
+          "source": "manual"
+        }
+      ],
+      "notes": "",
+      "lastUpdated": "2026-03-06",
+      "researchCount": 1
+    },
+    "Pure Encapsulations": {
+      "sentiment": "positive",
+      "categories": [
+        "supplement"
+      ],
+      "trustLevel": "high",
+      "signals": [
+        {
+          "dimension": "quality",
+          "polarity": "positive",
+          "detail": "Premium hypoallergenic formulations with extensive testing.",
+          "date": "2026-03-06",
+          "source": "manual"
+        },
+        {
+          "dimension": "quality",
+          "polarity": "positive",
+          "detail": "Trusted by functional medicine practitioners despite a higher price point.",
+          "date": "2026-03-06",
+          "source": "manual"
+        }
+      ],
+      "notes": "",
+      "lastUpdated": "2026-03-06",
+      "researchCount": 1
+    },
+    "Swanson (Ajipure)": {
+      "sentiment": "positive",
+      "categories": [
+        "supplement"
+      ],
+      "trustLevel": "high",
+      "signals": [
+        {
+          "dimension": "purity",
+          "polarity": "positive",
+          "detail": "Ajipure sourcing is treated as a gold standard for amino acid purity.",
+          "date": "2026-03-06",
+          "source": "manual"
+        },
+        {
+          "dimension": "quality",
+          "polarity": "positive",
+          "detail": "Japanese pharmaceutical-grade sourcing from Ajinomoto is a strong reputation signal.",
+          "date": "2026-03-06",
+          "source": "manual"
+        }
+      ],
+      "notes": "High confidence for amino acids specifically.",
+      "lastUpdated": "2026-03-06",
+      "researchCount": 1
+    },
+    "Thorne": {
+      "sentiment": "positive",
+      "categories": [
+        "supplement"
+      ],
+      "trustLevel": "high",
+      "signals": [
+        {
+          "dimension": "testing",
+          "polarity": "positive",
+          "detail": "Extensive third-party testing and NSF Certified for Sport on many products.",
+          "date": "2026-03-06",
+          "source": "manual"
+        },
+        {
+          "dimension": "quality",
+          "polarity": "positive",
+          "detail": "Trusted by practitioners and athletes for quality controls.",
+          "date": "2026-03-06",
+          "source": "manual"
+        }
+      ],
+      "notes": "Premium pricing reflects tighter quality controls.",
+      "lastUpdated": "2026-03-06",
+      "researchCount": 1
+    }
+  }
+}

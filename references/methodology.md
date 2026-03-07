@@ -1,5 +1,7 @@
 # Consensus Research Methodology
 
+This methodology is applied after normalizing raw evidence into a claims layer. The script now returns structured output by default and uses `--format raw` only when the caller explicitly wants the source dump.
+
 ## Source Hierarchy & Weights
 
 ### Tier 1 — Highest Signal (weight: HIGH)
@@ -56,14 +58,16 @@
 ### Tech & Electronics
 **Primary:** Reddit (r/headphones, r/buildapc, r/homeautomation, etc.), rtings.com, HackerNews
 **Secondary:** YouTube teardowns, Amazon verified
+**Extra:** GitHub repos can be useful for firmware utilities, developer hardware ecosystems, and issue-tracker health signals when a device has a public repo.
 **Extra:** Look for long-term reliability reports (6-month, 1-year follow-ups)
 **Search patterns:** `"[product]" review site:reddit.com`, `"[product]" long term site:reddit.com`, `"[product]" issues site:reddit.com`
 **Temporal decay half-life:** 1 year
 
 ### Software & Apps
-**Primary:** Reddit, HackerNews, G2/Capterra
+**Primary:** Reddit, HackerNews, G2/Capterra, GitHub
 **Secondary:** Twitter complaints, ProductHunt reviews
-**Search patterns:** `"[software]" review site:reddit.com`, `"[software]" site:news.ycombinator.com`, `"[software]" alternative`
+**Extra:** GitHub repo health can provide adoption and maintenance signals. Fetch the repo page directly instead of trusting search snippets alone.
+**Search patterns:** `"[software]" review site:reddit.com`, `"[software]" site:news.ycombinator.com`, `"[software]" alternative`, `"[software]" site:github.com`
 **Temporal decay half-life:** 6 months
 
 ## Anti-Noise Filters

@@ -4,7 +4,7 @@ Multi-source product, service, and restaurant research using weighted consensus 
 
 ## How It Works
 
-Instead of trusting any single source, this skill aggregates reviews from Reddit, Amazon, expert sites, YouTube, and niche forums — then scores products based on **cross-platform convergence**. If 3+ independent sources agree on a strength or flaw, it's probably real.
+Instead of trusting any single source, this skill aggregates reviews from Reddit, Amazon, expert sites, YouTube, Twitter/X, and niche forums — then scores products based on **cross-platform convergence**. If 3+ independent sources agree on a strength or flaw, it's probably real.
 
 ### The Core Principle
 
@@ -13,14 +13,17 @@ Instead of trusting any single source, this skill aggregates reviews from Reddit
 ## Features
 
 - **Reddit Deep Read** — Fetches full comment trees via Reddit's JSON endpoint (no API key needed). This is where 60%+ of the signal lives.
-- **Weighted Source Hierarchy** — Reddit/HackerNews (HIGH) → Wirecutter/niche forums (MEDIUM-HIGH) → Amazon verified (MEDIUM) → Trustpilot/generic reviews (LOW)
+- **Twitter/X Dual Signal Pass** — Scans X for both complaints AND positive signal. Catches real-time sentiment shifts, product changes, and usage patterns faster than any other platform.
+- **Temporal Scoping** — `--recent` or `--since 30d` to scope all searches to a time window. Auto-scopes by category (software: 6mo, restaurants: 12mo, supplements: no scope). Sources outside the window get half weight or context-only.
+- **Pattern Extraction** — For software, tools, and protocols: extracts HOW people actually use it (workflows, configs, power-user tips, anti-patterns), not just whether they like it. Auto-activates for applicable categories.
+- **Weighted Source Hierarchy** — Reddit/HackerNews (HIGH) → Wirecutter/niche forums (MEDIUM-HIGH) → Amazon verified/X (MEDIUM) → Trustpilot/generic reviews (LOW)
 - **Convergence Scoring** — 1-10 scale with severity multipliers. Safety issues hit harder than cosmetic complaints.
 - **Category-Aware** — Products, supplements, restaurants, services, tech, software — each with tuned source maps and temporal decay rates.
 - **Brand Intel Database** — Persistent reputation signals learned across research runs. Brands get flagged or trusted based on accumulated evidence.
 - **Price Normalization** — Cost-per-serving at recommended dose, not just container price.
 - **Competitor Auto-Discovery** — Finds alternatives organically from "switched from X" and "wish I got Y" patterns in reviews.
 - **Data Sufficiency Gate** — Won't produce a confident score on thin data. LOW confidence = honest caveats.
-- **Research Freshness Tracking** — Category-specific decay (restaurants: 6mo, supplements: 2yr, durable goods: 3yr).
+- **Research Freshness Tracking** — Category-specific decay (restaurants: 6mo, supplements: 2yr, durable goods: 3yr). Temporal scoring weights recent sources higher.
 - **Head-to-Head Comparison** — Simple differentiators between top 2 candidates: shared/unique strengths, issues, price winner.
 - **File-Based Cache** — MD5-keyed query cache (30min TTL, 2hr for quick mode). No wasted API calls on repeat queries.
 - **Auto-Save** — `--save` flag writes a readable markdown report + raw JSON to `memory/research/` with auto-generated filenames.
@@ -33,8 +36,8 @@ Instead of trusting any single source, this skill aggregates reviews from Reddit
 | Mode | When to Use | Sources |
 |------|-------------|---------|
 | **Quick** | Simple Amazon purchases under $50 | 2-3 searches, 1 Reddit deep read |
-| **Standard** | Most research (default) | Reddit (2-3 threads), Amazon, expert sites, Brave general |
-| **Deep** | Health products, $200+, ongoing commitments | Standard + YouTube transcripts + Twitter complaints |
+| **Standard** | Most research (default) | Reddit (2-3 threads), Amazon, expert sites, X dual-pass, temporal scoping |
+| **Deep** | Health products, $200+, ongoing commitments | Standard + YouTube transcripts + full pattern extraction + sub-agent parallelization |
 
 ## Usage
 
@@ -43,7 +46,7 @@ This is an [OpenClaw](https://github.com/openclaw/openclaw) skill. Install it in
 ```bash
 # Clone into your skills directory
 cd ~/your-workspace/skills
-git clone https://github.com/chainseeker44/consensus-research.git
+git clone https://github.com/Bryptobricks/consensus-researcher.git
 ```
 
 Then ask your agent to research something — it'll detect the skill automatically from your query context.
@@ -55,6 +58,9 @@ The `scripts/research.js` CLI automates data collection:
 ```bash
 # Standard supplement research
 BRAVE_API_KEY=your_key node scripts/research.js "glycine powder" --category supplement
+
+# Recent-only research (last 30 days)
+BRAVE_API_KEY=your_key node scripts/research.js "cursor IDE" --since 30d
 
 # Deep research with head-to-head comparison
 BRAVE_API_KEY=your_key node scripts/research.js "lion's mane" --depth deep --compare "Nootropics Depot" "Real Mushrooms"
@@ -96,7 +102,8 @@ consensus-research/
 │   └── research/                 # Auto-saved research reports (--save)
 └── references/
     ├── methodology.md            # Scoring framework, source weights, decay rates
-    └── brand-intel.md            # Persistent brand reputation database
+    ├── brand-intel.json          # Persistent brand reputation data (machine-readable)
+    └── brand-intel.md            # Persistent brand reputation database (human-readable)
 ```
 
 ## Source Hierarchy
@@ -104,13 +111,15 @@ consensus-research/
 | Tier | Sources | Weight | Why |
 |------|---------|--------|-----|
 | 1 | Reddit, HackerNews | HIGH | Real users, no financial incentive |
-| 2 | Wirecutter, rtings, niche forums | MEDIUM-HIGH | Methodology-driven, actually test products |
-| 3 | Amazon verified, Google Reviews, Twitter | MEDIUM | Good volume, filter for signal |
+| 2 | Wirecutter, rtings, niche forums, YouTube | MEDIUM-HIGH | Methodology-driven, actually test products |
+| 3 | Amazon verified, Google Reviews, Twitter/X | MEDIUM | Good volume, filter for signal. X dual-pass catches both complaints and positive patterns |
 | 4 | Trustpilot, generic review sites | LOW | Gamed, but patterns visible in volume |
 
 ## Scoring
 
 Baseline **5.0** (neutral). Each confirmed strength across 3+ sources: **+0.5**. Each confirmed issue: **-0.5**. Severity multipliers: safety = -1.5, major failure = -1.0, minor = -0.25.
+
+**Temporal scoring:** Sources within the category half-life get full weight. 1-2x half-life = half weight. Beyond 2x = context only.
 
 | Score | Verdict |
 |-------|---------|
@@ -118,6 +127,13 @@ Baseline **5.0** (neutral). Each confirmed strength across 3+ sources: **+0.5**.
 | 6.5–7.9 | Buy with Caveats |
 | 4.5–6.4 | Mixed |
 | < 4.5 | Avoid |
+
+## What's New (v4)
+
+- **Temporal Scoping** — explicit `--recent`/`--since` flags + auto-scope by category
+- **Twitter/X Dual Signal** — positive signal pass alongside complaint pass
+- **Pattern Extraction** — extracts usage workflows, power-user techniques, common configs, anti-patterns for software/tools
+- **Temporal Scoring** — sources weighted by age relative to category half-life
 
 ## Examples
 
